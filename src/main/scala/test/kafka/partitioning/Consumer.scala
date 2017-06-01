@@ -20,6 +20,9 @@ class Consumer(name: String, topic: String) extends Runnable {
 
     consumer = getConsumer()
     consumer.subscribe(util.Collections.singletonList("test"))
+    consumer.endOffsets(consumer.assignment())
+
+
     consumer.seekToBeginning(consumer.assignment())
 
     _read("I")

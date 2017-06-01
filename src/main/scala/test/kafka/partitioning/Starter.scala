@@ -12,16 +12,16 @@ import scala.Predef.StringFormat
   */
 object Starter {
   def main(args: Array[String]): Unit = {
-    var executor: ExecutorService = Executors.newFixedThreadPool(2)
+    var executor: ExecutorService = Executors.newFixedThreadPool(5)
+
     executor.submit(new Runnable {
-      override def run(): Unit = {
-        new BloombergConsumer("0").process()
-      }
+      override def run(): Unit = new SimpleConsumer("0").consume
     })
     executor.submit(new Runnable {
-      override def run(): Unit = {
-        new BloombergConsumer("1").process()
-      }
+      override def run(): Unit = new SimpleConsumer("1").consume
+    })
+    executor.submit(new Runnable {
+      override def run(): Unit = new SimpleConsumer("2").consume
     })
 
     Thread.sleep(24*60*60*1000)

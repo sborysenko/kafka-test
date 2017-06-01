@@ -45,6 +45,8 @@ class BloombergConsumer(name: String) {
 
 
           var stateRecords: ConsumerRecords[String, String] = null
+          var offsets = stateConsumer.endOffsets(collection);
+
 
           // Go to beginning for the partitions assigned to this topic.
           stateConsumer.seekToBeginning(collection)
@@ -83,5 +85,7 @@ class BloombergConsumer(name: String) {
 
     stateConsumer.subscribe(util.Collections.singletonList("test-1"), consumerRebalanceListener)
     stateConsumer.poll(0)
+
+    println("Done")
   }
 }
