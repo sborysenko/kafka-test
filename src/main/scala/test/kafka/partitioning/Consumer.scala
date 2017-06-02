@@ -38,7 +38,12 @@ class Consumer(name: String, topic: String, childTopic: String) {
           childLastOffsets += (partition.partition() -> childConsumer.position(partition))
           println("childConsumer: " + name + ", topic: " + partition.topic() + ", partition: " + partition.partition() + ", offset:" +  childConsumer.position(partition))
         })
-        childConsumer.seekToBeginning(childPartitions)
+
+        childPartitions.foreach(partition => {
+          childConsumer.seek(partition, childLastOffsets(partition.partition()))
+        })
+
+//        childConsumer.seekToBeginning(childPartitions)
       }
 
       override def onPartitionsRevoked(partitions: util.Collection[TopicPartition]): Unit = {
@@ -58,7 +63,7 @@ class Consumer(name: String, topic: String, childTopic: String) {
         val childRecords = childConsumer.poll(1000)
         for (record <- childRecords) {
           var action = "store"
-          if (record.offset() >= lastOffsets(record.partition())) action = "process"
+          if (record.offset() >= childLastOffsets(record.partition())) action = "process"
           println("childConsumer: " + name + ", partition: " + record.partition() + ", offset: " + record.offset() + ", value: " + record.value() + " action: " + action)
         }
     }
