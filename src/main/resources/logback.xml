@@ -9,7 +9,7 @@
         </layout>
     </appender>
 
-    <logger name="test.kafka.partitioning" level="debug"
+    <logger name="test.kafka" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>

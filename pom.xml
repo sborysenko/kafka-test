@@ -11,6 +11,7 @@
     <properties>
         <scala.version>2.11.8</scala.version>
         <scalactic.version>3.0.0</scalactic.version>
+        <kafka.version>0.10.0.1</kafka.version>
         <kafka.client.version>0.10.2.0</kafka.client.version>
     </properties>
 
@@ -27,6 +28,16 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.11</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>

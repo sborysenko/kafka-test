@@ -10,8 +10,8 @@ import scala.Predef.StringFormat
 /**
   * Created by sergey on 5/25/17.
   */
-object Starter {
-  def main(args: Array[String]): Unit = {
+object Starter extends App {
+  override def main(args: Array[String]): Unit = {
     var executor: ExecutorService = Executors.newFixedThreadPool(5)
 
     executor.submit(new Runnable {
